@@ -120,20 +120,8 @@
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 
--- Prints a header for the movies output
-.print "Movies"
-.print "======"
-.print ""
-
 -- The SQL statement for the movies output
 -- TODO!
-
--- Prints a header for the cast output
-.print ""
-.print "Top Cast"
-.print "========"
-.print ""
-
 
 -- The SQL statement for the cast output
 -- TODO!
@@ -229,4 +217,48 @@ INSERT INTO characters (
     ("Bane", "", 3, 9),
     ("John", "Blake", 3, 10),
     ("Selina", "Kyle", 3, 11)
+;
+
+-- Prints a header for the movies output
+.print "List of Movies"
+.print "======"
+.print ""
+-- - As a guest, I want to see a list of movies with the title, year released,
+--   MPAA rating, and studio information.
+SELECT movies.title, movies.year_released, movies.MPAA_rating, studios.name
+FROM movies INNER JOIN studios ON studios.id = movies.studio_id
+;
+
+-- Prints a header for the movies output
+.print ""
+.print "Movies from a Single Studio"
+.print "======"
+.print ""
+-- - As a guest, I want to see the movies which a single studio has produced.
+SELECT studios.name, movies.title
+FROM movies INNER JOIN studios ON studios.id = movies.studio_id
+WHERE movies.studio_id = 1
+;
+
+-- Prints a header for the cast output
+.print ""
+.print "Top Cast"
+.print "========"
+.print ""
+-- - As a guest, I want to see each movie's cast including each actor's
+--   name and the name of the character they portray.
+SELECT movies.title, actors.first_name, actors.last_name, characters.first_name, characters.last_name
+FROM movies INNER JOIN characters ON movies.id = characters.movie_id
+INNER JOIN actors ON actors.id = characters.actor_id
+;
+
+.print ""
+.print "Movies by Actor"
+.print "======"
+.print ""
+-- - As a guest, I want to see the movies which a single actor has acted in.
+SELECT actors.first_name, actors.last_name, movies.title
+FROM movies INNER JOIN characters ON movies.id = characters.movie_id
+INNER JOIN actors ON actors.id = characters.actor_id
+ORDER BY actors.first_name ASC
 ;
