@@ -139,7 +139,7 @@ CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   year_released TEXT,
-  MPAA_rating TEXT,
+  mpaa_rating TEXT,
   studio_id INTEGER
 );
 
@@ -165,7 +165,7 @@ CREATE TABLE characters (
 INSERT INTO movies (
     title,
     year_released,
-    MPAA_rating,
+    mpaa_rating,
     studio_id
 ) VALUES 
     ("Batman Begins", "2005", "PG-13", 1),
@@ -224,7 +224,7 @@ INSERT INTO characters (
 .print "List of Movies"
 .print "======"
 .print ""
-SELECT movies.title, movies.year_released, movies.MPAA_rating, studios.name
+SELECT movies.title, movies.year_released, movies.mpaa_rating, studios.name
 FROM movies INNER JOIN studios ON studios.id = movies.studio_id
 ;
 
